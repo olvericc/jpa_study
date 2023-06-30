@@ -3,6 +3,8 @@ package com.olvericc.jparepository.controllers;
 import com.olvericc.jparepository.entities.User;
 import com.olvericc.jparepository.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
         List<User> result = repository.findAll();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<User>> findAll(Pageable pageable) {
+        Page<User> result = repository.findAll(pageable);
         return ResponseEntity.ok(result);
     }
 
