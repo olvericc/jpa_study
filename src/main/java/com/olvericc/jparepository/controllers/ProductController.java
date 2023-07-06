@@ -1,7 +1,7 @@
 package com.olvericc.jparepository.controllers;
 
 import com.olvericc.jparepository.entities.Product;
-import com.olvericc.jparepository.entities.User;
+import com.olvericc.jparepository.exceptions.ProductNotFoundException;
 import com.olvericc.jparepository.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,8 +64,22 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
+    public Product createProduct(
+            @RequestBody Product product) {
         return repository.save(product);
+    }
+
+    @PutMapping(value = "/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product newProduct) {
+        return repository.findById(id)
+                .map(product -> {
+                    product.setDescription(newProduct.getDescription());
+                    product.setPrice(newProduct.getPrice());
+                    product.setQuantity(newProduct.getQuantity());
+
+                    return repository.save(product);
+                })
+        .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
 }
