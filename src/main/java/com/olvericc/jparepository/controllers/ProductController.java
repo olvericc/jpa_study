@@ -82,4 +82,12 @@ public class ProductController {
         .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
+    @DeleteMapping(value = "/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            throw new ProductNotFoundException(id);
+        }
+        repository.deleteById(id);
+    }
+
 }
