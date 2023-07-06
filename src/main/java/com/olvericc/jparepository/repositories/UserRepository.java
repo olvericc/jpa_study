@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT obj FROM User obj WHERE LOWER(obj.name) LIKE LOWER(CONCAT('%', :name, '%'))")
     Page<User> searchName(String name, Pageable pageable);
+
+    @Query("SELECT obj FROM User obj WHERE LOWER(obj.email) LIKE LOWER(CONCAT('%', :email, '%'))")
+    Page<User> searchEmail(String email, Pageable pageable);
 }

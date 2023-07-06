@@ -47,4 +47,11 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping(value = "/searchEmail")
+    public ResponseEntity<Page<User>> searchEmail(
+            @RequestParam(defaultValue = "") String email, Pageable pageable) {
+        Page<User> result = repository.searchEmail(email, pageable);
+        return ResponseEntity.ok(result);
+    }
+
 }
