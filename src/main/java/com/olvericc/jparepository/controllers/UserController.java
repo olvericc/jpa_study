@@ -39,11 +39,12 @@ public class UserController {
         Page<User> result = repository.searchSalary(minSalary, maxSalary, pageable);
         return ResponseEntity.ok(result);
     }
-/*
-    @GetMapping(value = "/searchByName")
-    public ResponseEntity<Page<User>> searchByName(@RequestParam(defaultValue = "") String name, Pageable pageable) {
-        Page<User> result = repository.findByNameContainingIgnoreCase(name, pageable);
+
+    @GetMapping(value = "/searchName")
+    public ResponseEntity<Page<User>> searchName(
+            @RequestParam(defaultValue = "") String name, Pageable pageable) {
+        Page<User> result = repository.searchName(name, pageable);
         return ResponseEntity.ok(result);
     }
-*/
+
 }
