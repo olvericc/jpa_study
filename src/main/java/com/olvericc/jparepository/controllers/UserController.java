@@ -1,6 +1,7 @@
 package com.olvericc.jparepository.controllers;
 
 import com.olvericc.jparepository.entities.User;
+import com.olvericc.jparepository.repositories.ProductRepository;
 import com.olvericc.jparepository.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,8 +18,12 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
+    private final UserRepository repository;
+
     @Autowired
-    private UserRepository repository;
+    public UserController(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
