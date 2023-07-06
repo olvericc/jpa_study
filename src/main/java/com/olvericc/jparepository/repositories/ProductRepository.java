@@ -17,4 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT obj FROM Product obj WHERE obj.quantity = :quantity")
     Page<Product> searchQuantity(Integer quantity, Pageable pageable);
 
+    @Query("SELECT obj FROM Product obj WHERE obj.id = :id")
+    Page<Product> searchById(Long id, Pageable pageable);
 }

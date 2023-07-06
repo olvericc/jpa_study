@@ -1,6 +1,7 @@
 package com.olvericc.jparepository.controllers;
 
 import com.olvericc.jparepository.entities.Product;
+import com.olvericc.jparepository.entities.User;
 import com.olvericc.jparepository.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,6 +56,13 @@ public class ProductController {
     public ResponseEntity<Page<Product>> searchQuantity(
             @RequestParam(defaultValue = "0") Integer quantity, Pageable pageable) {
         Page<Product> result = repository.searchQuantity(quantity, pageable);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(value = "/searchById")
+    public ResponseEntity<Page<Product>> searchById(
+            @RequestParam(defaultValue = "") Long id, Pageable pageable) {
+        Page<Product> result = repository.searchById(id, pageable);
         return ResponseEntity.ok(result);
     }
 
