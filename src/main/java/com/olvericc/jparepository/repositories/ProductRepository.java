@@ -13,4 +13,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT obj FROM Product obj WHERE LOWER(obj.description) LIKE LOWER(CONCAT('%', :description, '%'))")
     Page<Product> searchDescription(String description, Pageable pageable);
+
+    @Query("SELECT obj FROM Product obj WHERE obj.quantity = :quantity")
+    Page<Product> searchQuantity(Integer quantity, Pageable pageable);
+
 }

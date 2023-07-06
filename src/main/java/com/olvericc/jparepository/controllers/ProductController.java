@@ -44,10 +44,17 @@ public class ProductController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping(value = "searchDescription")
+    @GetMapping(value = "/searchDescription")
     public ResponseEntity<Page<Product>> searchDescription(
             @RequestParam(defaultValue = "") String description, Pageable pageable) {
         Page<Product> result = repository.searchDescription(description, pageable);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(value = "/searchQuantity")
+    public ResponseEntity<Page<Product>> searchQuantity(
+            @RequestParam(defaultValue = "0") Integer quantity, Pageable pageable) {
+        Page<Product> result = repository.searchQuantity(quantity, pageable);
         return ResponseEntity.ok(result);
     }
 
