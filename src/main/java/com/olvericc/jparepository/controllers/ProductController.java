@@ -57,15 +57,13 @@ public class ProductController {
     }
 
     @GetMapping(value = "/searchById")
-    public ResponseEntity<Page<Product>> searchById(
-            @RequestParam(defaultValue = "") Long id, Pageable pageable) {
+    public ResponseEntity<Page<Product>> searchById(@RequestParam(defaultValue = "") Long id, Pageable pageable) {
         Page<Product> result = repository.searchById(id, pageable);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping
-    public Product createProduct(
-            @RequestBody Product product) {
+    public Product createProduct(@RequestBody Product product) {
         return repository.save(product);
     }
 
