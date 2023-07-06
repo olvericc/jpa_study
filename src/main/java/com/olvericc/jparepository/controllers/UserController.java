@@ -54,4 +54,11 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping(value = "/searchById")
+    public ResponseEntity<Page<User>> searchById(
+            @RequestParam(defaultValue = "") Long id, Pageable pageable) {
+        Page<User> result = repository.searchById(id, pageable);
+        return ResponseEntity.ok(result);
+    }
+
 }
