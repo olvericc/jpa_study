@@ -2,6 +2,7 @@ import { Trash, Edit } from "lucide-react";
 import Modal from "../Modal/modal";
 import { useState } from "react";
 import ConfirmationModal from "@/app/templates/ConfirmationModal/ConfirmationModal";
+
 const Table = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 

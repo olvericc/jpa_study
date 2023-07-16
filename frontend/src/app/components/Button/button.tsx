@@ -1,30 +1,35 @@
-"use client";
-
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import Modal from "../Modal/modal";
 
-interface buttonProps {
-  text: string;
-  ButtonClass: string;
+interface ButtonProps {
+  buttonText: string;
+  buttonClass: string;
   modalTitle: string;
+  isModalOpen: boolean;
+  handleButtonClick: () => void;
+  closeModal: () => void;
   children: ReactNode;
 }
 
-const Button = ({ text, ButtonClass, modalTitle, children }: buttonProps) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+const Button = ({
+  buttonText,
+  buttonClass,
+  modalTitle,
+  isModalOpen,
+  handleButtonClick,
+  closeModal,
+  children,
+}: ButtonProps) => {
   return (
     <>
-      <button
-        className={`btn ${ButtonClass} mb-4`}
-        onClick={() => setIsModalOpen(true)}>
-        {text}
+      <button className={`btn ${buttonClass} mb-4`} onClick={handleButtonClick}>
+        {buttonText}
       </button>
 
       <Modal
         modalTitle={modalTitle}
         isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}>
+        setIsModalOpen={closeModal}>
         {children}
       </Modal>
     </>
